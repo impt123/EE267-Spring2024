@@ -158,13 +158,13 @@ var StateController = function ( dispParams ) {
 	// OUTPUT
 	// the mouse movement between frames in Three's coordinate as THREE.Vector2
 	function computeMovement( x, y, previousPosition ) {
-
+		
 		/* TODO (2.1.1.1) Mouse Movement */
 		// get the previous position (x,y)
 		previousX = previousPosition.x;
 		previousY = previousPosition.y;
 		// Update the mouse position
-		previousPosition.set(x,y);
+		// previousPosition.set( x, y );
 
 		return new THREE.Vector2(x-previousX, y-previousY);
 
