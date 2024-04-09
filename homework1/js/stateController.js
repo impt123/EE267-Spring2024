@@ -160,8 +160,13 @@ var StateController = function ( dispParams ) {
 	function computeMovement( x, y, previousPosition ) {
 
 		/* TODO (2.1.1.1) Mouse Movement */
+		// get the previous position (x,y)
+		previousX = previousPosition.x;
+		previousY = previousPosition.y;
+		// Update the mouse position
+		previousPosition.set(x,y);
 
-		return new THREE.Vector2();
+		return new THREE.Vector2(x-previousX, y-previousY);
 
 	}
 
@@ -194,11 +199,15 @@ var StateController = function ( dispParams ) {
 		if ( e.shiftKey && ! ctrlKey ) {
 
 			// XY translation
+			translateX = movement.x;
+			translateY = movement.y;
+			_this.state.modelTranslation.set(translateX,-translateY,0);
 
 		} else if ( ! e.shiftKey && ctrlKey ) {
 
 			// Z translation
-
+			translateZ = movement.y;
+			_this.state.modelTranslation.set(0,0,-translateZ);
 
 		} else {
 
