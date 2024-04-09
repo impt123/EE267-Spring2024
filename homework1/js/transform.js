@@ -46,11 +46,15 @@ var MVPmat = function ( dispParams ) {
 	function computeModelTransform( state ) {
 
 		/* TODO (2.1.1.3) Matrix Update / (2.1.2) Model Rotation  */
-		translateX = state.modelTranslation.x;
-		translateY = state.modelTranslation.y;
-		translateZ = state.modelTranslation.z;
-		// THREE.Matrix4().makeTranslation()
-		return new THREE.Matrix4().makeTranslation(translateX,translateY,translateZ);
+		var translateX = state.modelTranslation.x;
+		var translateY = state.modelTranslation.y;
+		var translateZ = state.modelTranslation.z;
+		var rotationX = state.modelRotation.x;
+		var rotationY = state.modelRotation.y;	
+		trOp = new THREE.Matrix4().makeTranslation(translateX,translateY,translateZ);
+		rtOpX = new THREE.Matrix4().makeRotationX( rotationX );
+		rtOpY = new THREE.Matrix4().makeRotationY( rotationY );
+		return trOp.multiply(rtOpX.multiply(rtOpY))
 
 	}
 

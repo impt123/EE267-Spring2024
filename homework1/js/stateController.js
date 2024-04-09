@@ -111,8 +111,7 @@ var StateController = function ( dispParams ) {
 		// Check the mouse is clicked. If not, do nothing.
 		if ( ! clickHold ) return;
 
-		var movement = computeMovement( x, y, previousPosition );
-
+		var movement = computeMovement( x, y, previousPosition );	
 
 		// Map mouse movements to matrix parameters
 
@@ -161,8 +160,8 @@ var StateController = function ( dispParams ) {
 		
 		/* TODO (2.1.1.1) Mouse Movement */
 		// get the previous position (x,y)
-		previousX = previousPosition.x;
-		previousY = previousPosition.y;
+		var previousX = previousPosition.x;
+		var previousY = previousPosition.y;
 		// Update the mouse position
 		// previousPosition.set( x, y );
 
@@ -199,19 +198,21 @@ var StateController = function ( dispParams ) {
 		if ( e.shiftKey && ! ctrlKey ) {
 
 			// XY translation
-			translateX = movement.x;
-			translateY = movement.y;
-			_this.state.modelTranslation.set(translateX,-translateY,0);
+			var translateX = movement.x;
+			var translateY = movement.y;
+			_this.state.modelTranslation.set( translateX, -translateY, 0 );
 
 		} else if ( ! e.shiftKey && ctrlKey ) {
 
 			// Z translation
-			translateZ = movement.y;
-			_this.state.modelTranslation.set(0,0,-translateZ);
+			var translateZ = movement.y;
+			_this.state.modelTranslation.set( 0, 0, -translateZ );
 
 		} else {
 
-			// Rotation
+			var rotationX = movement.y/20;
+			var rotationY = movement.x/20;
+			_this.state.modelRotation.set( rotationX, rotationY );
 
 		}
 
@@ -236,11 +237,17 @@ var StateController = function ( dispParams ) {
 		if ( ! ctrlKey ) {
 
 			// XY translation
+			var translateX = movement.x;
+			var translateY = movement.y;
+			_this.state.viewerPosition.x += translateX;
+			_this.state.viewerPosition.y -= translateY;	
+			// _this.state.viewerPosition.set( translateX, -translateY, 0 );	
 
 		} else {
 
 			// Z translation
-
+			var translateZ = movement.y;
+			_this.state.viewerPosition.z -= translateZ;
 		}
 
 	}
@@ -264,10 +271,16 @@ var StateController = function ( dispParams ) {
 		if ( ! ctrlKey ) {
 
 			// XY translation
+			var translateX = movement.x;
+			var translateY = movement.y;
+			_this.state.viewerTarget.x += translateX;
+			_this.state.viewerTarget.y -= translateY;	
 
 		} else {
 
 			// Z translation
+			var translateZ = movement.y;
+			_this.state.viewerTarget.z -= translateZ;
 
 		}
 
