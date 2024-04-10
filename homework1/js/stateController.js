@@ -163,7 +163,7 @@ var StateController = function ( dispParams ) {
 		var previousX = previousPosition.x;
 		var previousY = previousPosition.y;
 		// Update the mouse position
-		// previousPosition.set( x, y );
+		previousPosition.set( x, y );
 
 		return new THREE.Vector2(x-previousX, y-previousY);
 
@@ -200,19 +200,21 @@ var StateController = function ( dispParams ) {
 			// XY translation
 			var translateX = movement.x;
 			var translateY = movement.y;
-			_this.state.modelTranslation.set( translateX, -translateY, 0 );
+			_this.state.modelTranslation.x += translateX;
+			_this.state.modelTranslation.y -= translateY;
 
 		} else if ( ! e.shiftKey && ctrlKey ) {
 
 			// Z translation
 			var translateZ = movement.y;
-			_this.state.modelTranslation.set( 0, 0, -translateZ );
+			_this.state.modelTranslation.z -= -translateZ;
 
 		} else {
 
 			var rotationX = movement.y/20;
 			var rotationY = movement.x/20;
-			_this.state.modelRotation.set( rotationX, rotationY );
+			_this.state.modelRotation.x += rotationX;
+			_this.state.modelRotation.y += rotationY;
 
 		}
 

@@ -68,12 +68,18 @@ var MVPmat = function ( dispParams ) {
 	function computeViewTransform( state ) {
 
 		/* TODO (2.2.3) Implement View Transform */
+		var eyeVec = state.viewerPosition;
+		var zcVec = state.viewerTarget - state.viewerPosition;
+		var upVec = new THREE.Vector3( 0, 1, 0 );
+		var xcVec = (upVec.cross(zcVec)).normalize();
+		var ycVec = zcVec.cross(xcVec);
 
+		
 		return new THREE.Matrix4().set(
-			1, 0, 0, 0,
-			0, 1, 0, 0,
-			0, 0, 1, - 800,
-			0, 0, 0, 1 );
+			xcVec.x, 	xcVec.y, 	xcVec.z, 	-( xcVec.x * eyeVec.x + xcVec.y * eyeVec.y + xcVec.z * eyeVec.z ),
+			ycVec.x, 	ycVec.y, 	ycVec.z, 	-( ycVec.x * eyeVec.x + ycVec.y * eyeVec.y + ycVec.z * eyeVec.z ),
+			zcVec.x, 	zcVec.y, 	zcVec.z, 	-( zcVec.x * eyeVec.x + zcVec.y * eyeVec.y + zcVec.z * eyeVec.z ),
+			0, 			0, 			0, 			1 );
 
 	}
 
