@@ -298,6 +298,10 @@ var StateController = function ( dispParams ) {
 	function updateProjectionParams( e, movement ) {
 
 		/* TODO (2.3.1) Implement Perspective Transform */
+		var translateY = movement.y;
+		_this.state.clipNear += translateY/2;
+		// This to clamped to forbid less than 1 value!
+		_this.state.clipNear = Math.max(_this.state.clipNear, 1);
 
 	}
 

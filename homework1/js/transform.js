@@ -99,12 +99,25 @@ var MVPmat = function ( dispParams ) {
 		left, right, top, bottom, clipNear, clipFar ) {
 
 		/* TODO (2.3.1) Implement Perspective Projection */
+		/* By reading the code line, the right, ... variables 
+		refers to the position on the clipNear plane. Now we 
+		can define the necessary parameters:
+		*/
+		var fovy = Math.abs( 2 * Math.atan( ( top - bottom ) / clipNear ) );
+		var f = 1 / Math.tan( fovy / 2 );
+		var aspectRatio = Math.abs( ( right - left ) / ( top - bottom ) );
+		var mat33 = - ( clipFar + clipNear ) / ( clipFar - clipNear );
+		var mat34 = - ( 2 * clipFar * clipNear ) / ( clipFar - clipNear );
+		var mat11 = 2 * clipNear / ( right - left );
+		var mat22 = 2 * clipNear / ( top - bottom );
+		var mat13 = ( right + left ) / ( right - left );
+		var mat23 = ( top + bottom ) / ( top - bottom );
 
 		return new THREE.Matrix4().set(
-			6.7, 0, 0, 0,
-			0, 6.5, 0, 0,
-			0, 0, - 1.0, - 2.0,
-			0, 0, - 1.0, 0 );
+			mat11, 	0, 		mat13, 		0,
+			0, 		mat22, 	mat23, 		0,
+			0, 		0, 		mat33, 		mat34,
+			0, 		0,  	-1.0, 		0 );
 
 	}
 
@@ -120,8 +133,18 @@ var MVPmat = function ( dispParams ) {
 		left, right, top, bottom, clipNear, clipFar ) {
 
 		/* TODO (2.3.2) Implement Orthographic Projection */
+		var mat33 = ( - 2 ) / ( clipFar - clipNear );
+		var mat34 = - ( clipFar + clipNear ) / ( clipFar - clipNear );
+		var mat11 = 2 / ( right - left );
+		var mat22 = 2 / ( top - bottom );
+		var mat14 = - ( right + left ) / ( right - left );
+		var mat24 = - ( top + bottom ) / ( top - bottom );
 
-		return new THREE.Matrix4();
+		return new THREE.Matrix4().set(
+			mat11, 	0, 		0, 			mat14,
+			0, 		mat22, 	0, 			mat24,
+			0, 		0, 		mat33, 		mat34,
+			0, 		0,  	0, 			1 );
 
 	}
 
