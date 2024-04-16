@@ -27,7 +27,14 @@ attribute vec3 normal;
 
 void main() {
 
-	gl_Position = projectionMat * modelViewMat * vec4( position, 1.0 );
+	// For Phong lighting, only the transformations are done in vertex shader:
+	// First transform the vectors from world space into view space, this step includes: L, N.
+	normalCam = normalMat * normal;
+	normalCam /= length(normalCam);
+	vec3 position1 = vec3(position[0]+100.0, position[1], position[2]);
+	fragPosCam = (modelViewMat * vec4(position1, 0.0)).xyz;	
+	
+	gl_Position = projectionMat * modelViewMat * vec4( position, 1.0 );	
 
 }
 ` );
