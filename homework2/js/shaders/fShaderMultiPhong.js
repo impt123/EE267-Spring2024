@@ -75,7 +75,7 @@ void main() {
 	// Initiate the for loop for point light sources
 	for(int j = 0; j < NUM_POINT_LIGHTS; j++){ 
 		// Compute diffuse reflection
-		vec3 lightVecView = (viewMat * vec4( (pointLights[j].position) , 0.0 )).xyz - fragPosCam;
+		vec3 lightVecView = (viewMat * vec4( (pointLights[j].position) , 1.0 )).xyz - fragPosCam;
 		float distanceLV = length(lightVecView);
 		lightVecView /= distanceLV;
 		vec3 diffuseReflection = (material.diffuse * pointLights[j].color * max( 0.0, dot( normalCam , lightVecView ) ));
@@ -83,7 +83,7 @@ void main() {
 		// Compute specular term
 		vec3 viewerVecView = - fragPosCam;
 		viewerVecView /= length(viewerVecView);
-		vec3 rVecView = reflect(lightVecView, normalCam);
+		vec3 rVecView = - reflect(lightVecView, normalCam);
 		rVecView /= length(rVecView);
 		vec3 specularReflection = (material.specular * pointLights[j].color * pow( max(0.0, dot(rVecView, viewerVecView)) , material.shininess ) );
 
@@ -94,14 +94,15 @@ void main() {
 	// Initiate the for loop for directional light sources
 	for(int k = 0; k < NUM_DIR_LIGHTS; k++){ 
 		// Compute diffuse reflection
-		vec3 dirLightVecView = (viewMat * vec4(directionalLights[k].direction, 0)).xyz;
-		dirLightVecView /= length(dirLightVecView);
+		vec3 dirLightVecView = - normalize(directionalLights[k].direction); 
+		// (viewMat * vec4(directionalLights[k].direction, 0)).xyz;
+		// dirLightVecView /= length(dirLightVecView);
 		vec3 diffuseReflection = (material.diffuse * directionalLights[k].color * max( 0.0, dot( normalCam , dirLightVecView ) ));
 
 		// Compute specular term
 		vec3 viewerVecView = - fragPosCam;
 		viewerVecView /= length(viewerVecView);
-		vec3 rVecView = reflect(dirLightVecView, normalCam);
+		vec3 rVecView = - reflect(dirLightVecView, normalCam);
 		rVecView /= length(rVecView);
 		vec3 specularReflection = (material.specular * directionalLights[k].color * pow( max(0.0, dot(rVecView, viewerVecView)) , material.shininess ) );
 

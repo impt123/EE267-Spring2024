@@ -67,8 +67,8 @@ void main() {
 		// First transform the vectors from world space into view space, this step includes: L, N.
 		vec4 normalView = vec4( normalMat * normal , 0.0 );
 		normalView /= length(normalView);
-		vec3 position1 = vec3(position[0]-50.0, position[1], position[2]);
-		vec4 lightVecView = viewMat * vec4( (pointLights[j].position) , 0.0 ) - modelViewMat * vec4( position1 , 0.0 );
+		// vec3 position1 = vec3(position[0]-50.0, position[1], position[2]);
+		vec4 lightVecView = viewMat * vec4( (pointLights[j].position) , 1.0 ) - modelViewMat * vec4( position , 1.0 );
 		float distanceLV = length(lightVecView);
 		lightVecView /= distanceLV;
 

@@ -60,7 +60,7 @@ void main() {
 
 	for(int j = 0; j < NUM_POINT_LIGHTS; j++){ 
 		// Compute diffuse reflection
-		vec3 lightVecView = (viewMat * vec4( (pointLights[j].position) , 0.0 )).xyz - fragPosCam;
+		vec3 lightVecView = (viewMat * vec4( (pointLights[j].position) , 1.0 )).xyz - fragPosCam;
 		float distanceLV = length(lightVecView);
 		lightVecView /= distanceLV;
 
@@ -69,7 +69,7 @@ void main() {
 		// Compute specular term
 		vec3 viewerVecView = - fragPosCam;
 		viewerVecView /= length(viewerVecView);
-		vec3 rVecView = reflect(lightVecView, normalCam);
+		vec3 rVecView = - reflect(lightVecView, normalCam);
 		rVecView /= length(rVecView);
 		vec3 specularReflection = (material.specular * pointLights[j].color * pow( max(0.0, dot(rVecView, viewerVecView)) , material.shininess ) );
 

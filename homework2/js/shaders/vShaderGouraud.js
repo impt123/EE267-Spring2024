@@ -64,19 +64,17 @@ void main() {
 	for(int j = 0; j < NUM_POINT_LIGHTS; j++){ 
 		// Compute diffuse reflection
 		// First transform the vectors from world space into view space, this step includes: L, N.
-		vec4 normalView = vec4( normalMat * normal , 0.0 );
-		normalView /= length(normalView);
-		vec3 position1 = vec3(position[0]-50.0, position[1], position[2]);
-		vec4 lightVecView = viewMat * vec4( (pointLights[j].position) , 0.0 ) - modelViewMat * vec4( position , 0.0 );
+		vec3 normalView = normalize(normalMat * normal);
+		vec3 lightVecView = (viewMat * vec4( (pointLights[j].position) , 1.0 ) - modelViewMat * vec4( position , 1.0 )).xyz;
 		float distanceLV = length(lightVecView);
 		lightVecView /= distanceLV;
 
 		vec3 diffuseReflection = (material.diffuse * pointLights[j].color * max( 0.0, dot( normalView , lightVecView ) ));
 
 		// Compute specular term
-		vec4 viewerVecView = - modelViewMat * vec4( position , 0.0 );
+		vec3 viewerVecView = ( - modelViewMat * vec4( position , 1.0 ) ).xyz;
 		viewerVecView /= length(viewerVecView);
-		vec4 rVecView = reflect(lightVecView, normalView);
+		vec3 rVecView = - reflect(lightVecView, normalView);
 		rVecView /= length(rVecView);
 		vec3 specularReflection = (material.specular * pointLights[j].color * pow( max(0.0, dot(rVecView, viewerVecView)) , material.shininess ) );
 
