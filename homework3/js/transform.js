@@ -75,14 +75,32 @@ var MVPmat = function ( dispParams ) {
 		var viewerUp = new THREE.Vector3( 0, 1, 0 );
 
 		var translationMat
-	   = new THREE.Matrix4().makeTranslation(
+	    = new THREE.Matrix4().makeTranslation(
 			 - viewerPosition.x,
 			 - viewerPosition.y,
 			 - viewerPosition.z );
 
 		var rotationMat = new THREE.Matrix4().lookAt( viewerPosition, viewerTarget, viewerUp ).transpose();
+		
+		// here is the script for hw1:
+		var eyeVec = new THREE.Vector3(viewerPosition.x + halfIpdShift, viewerPosition.y, viewerPosition.z);
+		var zcVec = new THREE.Vector3(viewerPosition.x + halfIpdShift - viewerTarget.x, viewerPosition.y - viewerTarget.y, viewerPosition.z - viewerTarget.z);
+		zcVec.normalize();
+		var upVec = viewerUp;
+		var xcVec = new THREE.Vector3();
+		xcVec.crossVectors( upVec, zcVec );
+		xcVec.normalize();
+		var ycVec = new THREE.Vector3();
+		ycVec.crossVectors( zcVec, xcVec );
 
-		return new THREE.Matrix4().premultiply( translationMat ).premultiply( rotationMat );
+		
+		return new THREE.Matrix4().set(
+			xcVec.x, 	xcVec.y, 	xcVec.z, 	-( xcVec.x * eyeVec.x + xcVec.y * eyeVec.y + xcVec.z * eyeVec.z ),
+			ycVec.x, 	ycVec.y, 	ycVec.z, 	-( ycVec.x * eyeVec.x + ycVec.y * eyeVec.y + ycVec.z * eyeVec.z ),
+			zcVec.x, 	zcVec.y, 	zcVec.z, 	-( zcVec.x * eyeVec.x + zcVec.y * eyeVec.y + zcVec.z * eyeVec.z ),
+			0, 			0, 			0, 			1 );
+
+		// return new THREE.Matrix4().premultiply( translationMat ).premultiply( rotationMat );
 
 	}
 
@@ -151,10 +169,12 @@ var MVPmat = function ( dispParams ) {
 
 			// Compute projection matrix
 			var right =
-				( dispParams.canvasWidth * dispParams.pixelPitch / 2 )
+				( ( dispParams.canvasWidth * dispParams.pixelPitch + dispParams.ipd ) / 2 )
 					* ( state.clipNear / dispParams.distanceScreenViewer );
 
-			var left = - right;
+			var left = 
+				( ( dispParams.canvasWidth * dispParams.pixelPitch - dispParams.ipd ) / 2 )
+					* ( state.clipNear / dispParams.distanceScreenViewer );
 
 			var top =
 				( dispParams.canvasHeight * dispParams.pixelPitch / 2 )
@@ -163,10 +183,10 @@ var MVPmat = function ( dispParams ) {
 			var bottom = - top;
 
 			this.anaglyphProjectionMat.L = computePerspectiveTransform(
-				left, right, top, bottom, state.clipNear, state.clipFar );
+				-left, right, top, bottom, state.clipNear, state.clipFar );
 
 			this.anaglyphProjectionMat.R = computePerspectiveTransform(
-				left, right, top, bottom, state.clipNear, state.clipFar );
+				-right, left, top, bottom, state.clipNear, state.clipFar );
 
 		}
 

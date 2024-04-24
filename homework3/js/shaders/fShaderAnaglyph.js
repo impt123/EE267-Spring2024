@@ -29,7 +29,15 @@ uniform sampler2D textureMapR;
 
 void main() {
 
-	gl_FragColor = texture2D( textureMapL,  textureCoords );
+	// get the RGB colors of the left and right eyes
+	vec4 fragColorLeft = texture2D( textureMapL,  textureCoords );
+	vec4 fragColorRight = texture2D( textureMapR,  textureCoords );	
+
+	// convert to gray scale:
+	float fragGrayLeft = 0.2989 * fragColorLeft.x + 0.5870 * fragColorLeft.y + 0.1140 * fragColorLeft.z;
+	float fragGrayRight = 0.2989 * fragColorRight.x + 0.5870 * fragColorRight.y + 0.1140 * fragColorRight.z;
+
+	gl_FragColor = vec4(fragGrayLeft, fragGrayRight, fragGrayRight, 1.0);
 
 }
 ` );
