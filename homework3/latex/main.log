@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.4.6)  22 APR 2024 17:01
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.4.6)  25 APR 2024 16:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -277,7 +277,7 @@ File: figures/qib.png Graphic file (type bmp)
 <figures/qib.png>
  [1
 
-] [2] (./main.aux) ) 
+] [2] [3] (./main.aux) ) 
 Here is how much of TeX's memory you used:
  4598 strings out of 476179
  72668 string characters out of 5809545
@@ -285,6 +285,6 @@ Here is how much of TeX's memory you used:
  25295 multiletter control sequences out of 15000+600000
  474284 words of font info for 55 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 108i,12n,106p,793b,238s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 108i,12n,106p,885b,238s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (2 pages).
+Output written on main.pdf (3 pages).

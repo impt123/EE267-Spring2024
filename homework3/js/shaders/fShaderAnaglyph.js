@@ -38,6 +38,7 @@ void main() {
 	float fragGrayRight = 0.2989 * fragColorRight.x + 0.5870 * fragColorRight.y + 0.1140 * fragColorRight.z;
 
 	gl_FragColor = vec4(fragGrayLeft, fragGrayRight, fragGrayRight, 1.0);
+	// gl_FragColor = vec4(fragColorLeft.x, fragColorRight.y, fragColorRight.z, 1.0);
 
 }
 ` );

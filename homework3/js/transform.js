@@ -74,17 +74,14 @@ var MVPmat = function ( dispParams ) {
 
 		var viewerUp = new THREE.Vector3( 0, 1, 0 );
 
-		var translationMat
-	    = new THREE.Matrix4().makeTranslation(
-			 - viewerPosition.x,
-			 - viewerPosition.y,
-			 - viewerPosition.z );
+		var translationIpdMat
+	    = new THREE.Matrix4().makeTranslation(halfIpdShift, 0.0, 0.0 );
 
 		var rotationMat = new THREE.Matrix4().lookAt( viewerPosition, viewerTarget, viewerUp ).transpose();
 		
 		// here is the script for hw1:
-		var eyeVec = new THREE.Vector3(viewerPosition.x + halfIpdShift, viewerPosition.y, viewerPosition.z);
-		var zcVec = new THREE.Vector3(viewerPosition.x + halfIpdShift - viewerTarget.x, viewerPosition.y - viewerTarget.y, viewerPosition.z - viewerTarget.z);
+		var eyeVec = new THREE.Vector3(viewerPosition.x, viewerPosition.y, viewerPosition.z);
+		var zcVec = new THREE.Vector3(viewerPosition.x - viewerTarget.x, viewerPosition.y - viewerTarget.y, viewerPosition.z - viewerTarget.z);
 		zcVec.normalize();
 		var upVec = viewerUp;
 		var xcVec = new THREE.Vector3();
@@ -92,15 +89,13 @@ var MVPmat = function ( dispParams ) {
 		xcVec.normalize();
 		var ycVec = new THREE.Vector3();
 		ycVec.crossVectors( zcVec, xcVec );
-
-		
-		return new THREE.Matrix4().set(
+		var viewMatIncomplete = new THREE.Matrix4().set(
 			xcVec.x, 	xcVec.y, 	xcVec.z, 	-( xcVec.x * eyeVec.x + xcVec.y * eyeVec.y + xcVec.z * eyeVec.z ),
 			ycVec.x, 	ycVec.y, 	ycVec.z, 	-( ycVec.x * eyeVec.x + ycVec.y * eyeVec.y + ycVec.z * eyeVec.z ),
 			zcVec.x, 	zcVec.y, 	zcVec.z, 	-( zcVec.x * eyeVec.x + zcVec.y * eyeVec.y + zcVec.z * eyeVec.z ),
 			0, 			0, 			0, 			1 );
 
-		// return new THREE.Matrix4().premultiply( translationMat ).premultiply( rotationMat );
+		return new THREE.Matrix4().premultiply( viewMatIncomplete ).premultiply( translationIpdMat );
 
 	}
 

@@ -103,11 +103,14 @@ For point $p_4$, the circle of confusion in the image plane can be calculated vi
     c = S_e\frac{|d_4-d_3|}{|d_4|}\frac{f}{d_3-f} = 5f/(1000-f) = 0.12\ \text{mm}.
 \end{equation}
 
-\subsection*{Visual Acuity}
+\subsection*{(iii) Visual Acuity}
 For 13.3'' Macbook Pro, the diagonal distance is 13.3''. With a screen resolution of $2560\times1600$, the diagonal has the number of pixel given as: $\sqrt{2560^2+1600^2}=3020$. Therefore the number of pixel in 1 cm is: $3020/33.78\ \text{cm} = 89.4\ \text{cm}^{-1}$. Therefore the visual angle of one pixel is $1/89.4/50/\pi\times180\degree = 0.0128\degree$. For 1 degree, at a viewing distance of 50 cm, the arc length will be $50\ cm \times \pi/180 = 0.873$ cm. The number of pixel that one can placed into such distance is: $0.873\times89.4 = 78$. Therefore the number of dark-bright alternating pair of lines is $78/2=39$ cpd. It is higher than 30 cpd that humans can perceive. 
 
-\subsection*{Eccentricity and Visual Acuity}
+\subsection*{(iv) Eccentricity and Visual Acuity}
 \subsubsection*{(a,b)}
 For p5, the angle $\theta_e=36.9\degree$. Using the equation of eccentricity, one can get: $\omega=m\theta_e+\omega_0 = 0.0275\times36.8+1/48 = 1.03\degree $. The acuity is the reciprocal of the MAR, therefore the highest frequency one can resolve would be: $1/1.03\degree=$ 0.97 cpd. 
+
+\subsection*{2.4.4 Anaglyph Perceptual Question}
+The alternative color scheme is such that the red color channel information from the left eye perspective is used for the red channel at the output, while the blue and green information from the right eye perspective is used for the blue and green channel at the output. The advantage is that it recovers certain amount of color information into the output image. However, the major disadvantage of such method is that false and unrealistic color will emerge at the edges where the color changes dramatically. In such region, the left and right images are shifted by a slight amount due to rendering. In between, the correct color for the two eyes should be different. However, using such method, it unifies the output color as a single one, which is incorrect for both eyes. 
 
 \end{document}
