@@ -110,10 +110,16 @@ var MVPmat = function ( dispParams ) {
 	function computeTopBottomLeftRight( clipNear, clipFar, dispParams ) {
 
 		/* TODO (2.1.2) Stereo Rendering */
-
+		console.log(dispParams.canvasWidth * dispParams.pixelPitch);
 		return {
-			topL: 80, bottomL: - 80, leftL: - 80, rightL: 80,
-			topR: 80, bottomR: - 80, leftR: - 80, rightR: 80,
+			topL: clipNear * dispParams.computeLensMagnification() * dispParams.canvasHeight * dispParams.pixelPitch / 2 / (dispParams.computeDistanceScreenViewer()), 
+			bottomL: - clipNear * dispParams.computeLensMagnification() * dispParams.canvasHeight * dispParams.pixelPitch / 2 / (dispParams.computeDistanceScreenViewer()), 
+			leftL: - clipNear * dispParams.computeLensMagnification() * (dispParams.canvasWidth * dispParams.pixelPitch - dispParams.ipd) / 2 / (dispParams.computeDistanceScreenViewer()), 
+			rightL: clipNear * dispParams.computeLensMagnification() * (dispParams.ipd) / 2 / (dispParams.computeDistanceScreenViewer()),
+			topR: clipNear * dispParams.computeLensMagnification() * dispParams.canvasHeight * dispParams.pixelPitch / 2 / (dispParams.computeDistanceScreenViewer()), 
+			bottomR: - clipNear * dispParams.computeLensMagnification() * dispParams.canvasHeight * dispParams.pixelPitch / 2 / (dispParams.computeDistanceScreenViewer()), 
+			leftR: - clipNear * dispParams.computeLensMagnification() * (dispParams.ipd) / 2 / (dispParams.computeDistanceScreenViewer()), 
+			rightR: clipNear * dispParams.computeLensMagnification() * (dispParams.canvasWidth * dispParams.pixelPitch - dispParams.ipd) / 2 / (dispParams.computeDistanceScreenViewer()), 
 		};
 
 	}

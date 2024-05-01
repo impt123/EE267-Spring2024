@@ -1,0 +1,60 @@
+% \documentclass[11pt]{article}
+% \usepackage[utf8]{inputenc}	% Para caracteres en español
+% \usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+% \usepackage{multirow,booktabs}
+% \usepackage[table]{xcolor}
+% \usepackage{fullpage}
+% \usepackage{lastpage}
+% \usepackage{enumitem}
+% \usepackage{fancyhdr}
+% \usepackage{mathrsfs}
+% \usepackage{wrapfig}
+% \usepackage{setspace}
+% \usepackage{calc}
+% \usepackage{multicol}
+% \usepackage{cancel}
+% \usepackage[retainorgcmds]{IEEEtrantools}
+% \usepackage[margin=3cm]{geometry}
+% \usepackage{amsmath}
+% \newlength{\tabcont}
+% \setlength{\parindent}{0.0in}
+% \setlength{\parskip}{0.05in}
+% \usepackage{empheq}
+% \usepackage{framed}
+% \usepackage[most]{tcolorbox}
+% \usepackage{xcolor}
+% \colorlet{shadecolor}{orange!15}
+% \geometry{margin=1in, headsep=0.25in}
+
+\documentclass[11pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,scrextend}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\setlength{\headheight}{14pt}
+\usepackage{xcolor}
+\usepackage{color,soul}
+\usepackage{gensymb}
+\pagestyle{fancy}
+
+
+\begin{document}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+
+\lhead{EE267 Virtual Reality}
+\chead{Homework 4 Answers}
+\rhead{Bohan Li}
+
+\section{Theoretical Part}
+\subsection{Consistent Occlusions in Optical See-through AR}
+\subsubsection*{(i)}
+In order to achieve the occlusion with the virtual object behind the physical object, we need to figure out the position of the physical object in the window space. This requires an extra camera to identify the physical object and specify the location. Then depending on the location of the virtual object in window space, if any overlap happens, then just discard the virtual object information, i.e. the virtual object is hidden behind. 
+\subsubsection*{(ii)}
+In order to achieve the occlution with the virtual object in front, we need to figure out the position of the virtual object in the window space first. Then we need an array (high resolution) of switchable light filter to be implemented onto the AR glasses. For whatever positions that we want the virtual object to be at front, we just send in an electrical signal to close the filter at these pixels, such that the physical scene is blocked. We do not need extra camera. 
+
+
+\end{document}

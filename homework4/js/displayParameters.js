@@ -51,10 +51,11 @@ var DisplayParameters = function () {
 
 	// Magnification of the lens
 	this.lensMagnification = computeLensMagnification();
+	
 
 	// Distance between the viewer and the virtual screen in [mm]
 	this.distanceScreenViewer = computeDistanceScreenViewer();
-
+	// console.log(computeDistanceScreenViewer());
 
 
 	/* Functions */
@@ -70,8 +71,8 @@ var DisplayParameters = function () {
 	function computeLensMagnification() {
 
 		/* TODO (2.1.1) Calculating Parameters of the Magnified Virtual Screen Image */
-
-		return 1;
+		// console.log(focalLength / ( focalLength - _this.distLensScreen ));
+		return focalLength / ( focalLength - _this.distLensScreen );
 
 	}
 
@@ -86,8 +87,8 @@ var DisplayParameters = function () {
 	function computeDistanceScreenViewer() {
 
 		/* TODO (2.1.1) Calculating Parameters of the Magnified Virtual Screen Image */
-
-		return 1500;
+		// console.log(1.0 / ( 1.0 / focalLength - 1.0 / _this.distLensScreen ) + eyeRelief);
+		return 1.0 / ( 1.0 / focalLength - 1.0 / _this.distLensScreen ) + eyeRelief;
 
 	}
 
@@ -104,7 +105,6 @@ var DisplayParameters = function () {
 		_this.canvasWidth = window.innerWidth;
 
 	} );
-
 
 
 	/* Expose as public functions */
