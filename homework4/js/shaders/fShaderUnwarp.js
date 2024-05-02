@@ -53,6 +53,7 @@ void main() {
 
 	// calculate the distorted coordinates:
 	vec2 distortedCoords = (textureCoords - centerCoordinate) * scalingFactor + centerCoordinate;
+	// vec2 distortedCoords = (textureCoords) * scalingFactor;
 
 	// assign color to the lookup coordinates:
 	if ( (distortedCoords[0] < 1.0) && (distortedCoords[0] >= 0.0) && (distortedCoords[1] < 1.0) && (distortedCoords[1] >= 0.0)){

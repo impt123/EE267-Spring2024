@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.4.6)  30 APR 2024 16:27
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.4.6)  2 MAY 2024 11:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -267,14 +267,25 @@ Package gensymb Warning: Not defining \micro.
 
 [1
 
-] (./main.aux) ) 
+]
+LaTeX Font Info:    Trying to load font information for U+msa on input line 67.
+ (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 67.
+ (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+File: lenscorrection.png Graphic file (type bmp)
+<lenscorrection.png>
+ [2] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 4535 strings out of 476179
- 71629 string characters out of 5809545
+ 4591 strings out of 476179
+ 72524 string characters out of 5809545
  402779 words of memory out of 5000000
- 25258 multiletter control sequences out of 15000+600000
- 469620 words of font info for 35 fonts, out of 8000000 for 9000
+ 25293 multiletter control sequences out of 15000+600000
+ 474268 words of font info for 53 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 108i,11n,106p,582b,232s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 108i,11n,106p,709b,232s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (1 page).
+Output written on main.pdf (2 pages).

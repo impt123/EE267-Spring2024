@@ -143,7 +143,7 @@ var StereoUnwarpRenderer = function ( webglRenderer, dispParams ) {
 
 		var centerCoordR = new THREE.Vector2( (dispParams.ipd / dispParams.pixelPitch / 2.0) / dispParams.canvasWidth * 2.0 , 0.5 );
 
-		console.log(dispParams.canvasWidth / 2.0, dispParams.ipd / dispParams.pixelPitch / 2.0);
+		console.log(dispParams.canvasWidth, dispParams.canvasHeight, dispParams.canvasWidth / 2.0 - dispParams.ipd / dispParams.pixelPitch / 2.0);
 
 		return { L: centerCoordL, R: centerCoordR };
 
