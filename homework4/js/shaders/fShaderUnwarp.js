@@ -39,7 +39,27 @@ uniform float distLensScreen;
 
 void main() {
 
-	gl_FragColor = texture2D( map, textureCoords );
+	// hello darkness my old friend;
+	gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0); 
+	
+	// calculate the distance to center in metric unit:
+	float distanceToCenter = sqrt( pow(( textureCoords[0] - centerCoordinate[0] ) * viewportSize[0] , 2.0) + pow(( textureCoords[1] - centerCoordinate[1] ) * viewportSize[1] , 2.0) );
+
+	// calculate normalized distance:
+	float rNormalized = distanceToCenter / distLensScreen;
+
+	// calculate the scaling factor 1 + K1 r^2 + K2 r^4
+	float scalingFactor = 1.0 + K[0] * pow(rNormalized , 2.0) + K[1] * pow(rNormalized , 4.0);
+
+	// calculate the distorted coordinates:
+	vec2 distortedCoords = (textureCoords - centerCoordinate) * scalingFactor + centerCoordinate;
+
+	// assign color to the lookup coordinates:
+	if ( (distortedCoords[0] < 1.0) && (distortedCoords[0] >= 0.0) && (distortedCoords[1] < 1.0) && (distortedCoords[1] >= 0.0)){
+		gl_FragColor = texture2D( map, distortedCoords );
+	} 
+
+	// gl_FragColor = texture2D( map, textureCoords );
 
 }
 ` );

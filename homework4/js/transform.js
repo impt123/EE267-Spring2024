@@ -110,7 +110,7 @@ var MVPmat = function ( dispParams ) {
 	function computeTopBottomLeftRight( clipNear, clipFar, dispParams ) {
 
 		/* TODO (2.1.2) Stereo Rendering */
-		console.log(dispParams.canvasWidth * dispParams.pixelPitch);
+		// console.log(dispParams.canvasWidth * dispParams.pixelPitch);
 		return {
 			topL: clipNear * dispParams.computeLensMagnification() * dispParams.canvasHeight * dispParams.pixelPitch / 2 / (dispParams.computeDistanceScreenViewer()), 
 			bottomL: - clipNear * dispParams.computeLensMagnification() * dispParams.canvasHeight * dispParams.pixelPitch / 2 / (dispParams.computeDistanceScreenViewer()), 

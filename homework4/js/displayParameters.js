@@ -88,7 +88,7 @@ var DisplayParameters = function () {
 
 		/* TODO (2.1.1) Calculating Parameters of the Magnified Virtual Screen Image */
 		// console.log(1.0 / ( 1.0 / focalLength - 1.0 / _this.distLensScreen ) + eyeRelief);
-		return 1.0 / ( 1.0 / focalLength - 1.0 / _this.distLensScreen ) + eyeRelief;
+		return 1.0 / ( - 1.0 / focalLength + 1.0 / _this.distLensScreen ) + eyeRelief;
 
 	}
 

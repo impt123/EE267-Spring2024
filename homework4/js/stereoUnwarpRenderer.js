@@ -139,9 +139,11 @@ var StereoUnwarpRenderer = function ( webglRenderer, dispParams ) {
 	// All the parameters you need for your calculations are found in the function arguments.
 	function computeCenterCoord( dispParams ) {
 
-		var centerCoordL = new THREE.Vector2( 0, 0 );
+		var centerCoordL = new THREE.Vector2( (dispParams.canvasWidth / 2.0 - dispParams.ipd / dispParams.pixelPitch / 2.0) / dispParams.canvasWidth * 2.0 , 0.5 );
 
-		var centerCoordR = new THREE.Vector2( 0, 0 );
+		var centerCoordR = new THREE.Vector2( (dispParams.ipd / dispParams.pixelPitch / 2.0) / dispParams.canvasWidth * 2.0 , 0.5 );
+
+		console.log(dispParams.canvasWidth / 2.0, dispParams.ipd / dispParams.pixelPitch / 2.0);
 
 		return { L: centerCoordL, R: centerCoordR };
 
