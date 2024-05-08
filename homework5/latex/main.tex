@@ -1,0 +1,120 @@
+% \documentclass[11pt]{article}
+% \usepackage[utf8]{inputenc}	% Para caracteres en español
+% \usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+% \usepackage{multirow,booktabs}
+% \usepackage[table]{xcolor}
+% \usepackage{fullpage}
+% \usepackage{lastpage}
+% \usepackage{enumitem}
+% \usepackage{fancyhdr}
+% \usepackage{mathrsfs}
+% \usepackage{wrapfig}
+% \usepackage{setspace}
+% \usepackage{calc}
+% \usepackage{multicol}
+% \usepackage{cancel}
+% \usepackage[retainorgcmds]{IEEEtrantools}
+% \usepackage[margin=3cm]{geometry}
+% \usepackage{amsmath}
+% \newlength{\tabcont}
+% \setlength{\parindent}{0.0in}
+% \setlength{\parskip}{0.05in}
+% \usepackage{empheq}
+% \usepackage{framed}
+% \usepackage[most]{tcolorbox}
+% \usepackage{xcolor}
+% \colorlet{shadecolor}{orange!15}
+% \geometry{margin=1in, headsep=0.25in}
+
+\documentclass[11pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb,scrextend}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\setlength{\headheight}{14pt}
+\usepackage{xcolor}
+\usepackage{color,soul}
+\usepackage{gensymb}
+\pagestyle{fancy}
+
+
+\begin{document}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+
+\lhead{EE267 Virtual Reality}
+\chead{Homework 5 Answers}
+\rhead{Bohan Li}
+
+\section{Theoretical Part}
+\subsection{Rotation Quaternions}
+The rotation quaternion with the rotation angle as $\theta$ and rotation axis $\textbf{v} = (v_x, v_y, v_z)^T $ is given as:
+\begin{align}
+    q(\theta,v) = \cos(\theta/2) + i v_x \sin(\theta/2) + j v_y \sin(\theta/2) + k v_z \sin(\theta/2).
+\end{align}
+The length of $q$ is \[|q| = \sqrt{\cos^2(\theta/2)+( v_x^2 + v_y^2 + v_z^2) \sin^2(\theta/2)} = \cos^2(\theta/2) + \sin^2(\theta/2) = 1.\]
+
+\subsection{3-D Gyro Integration}
+\subsubsection*{(i)}
+The refresh rate is $1\ Hz$ so the time step is given as $1\ s$. The angle of rotation is given as $||\omega||\Delta{t}$ and the rotation axis is $\frac{\omega}{||\omega||}$. Therefore, the rotation axis and amount of rotation for each 1, 2, 3, 4 is:
+\begin{align*}
+    & ||\theta^{(1)}|| = 90 \degree,\ axis^{(1)}=(1,0,0)^T\\
+    & ||\theta^{(2)}|| = -90 \degree,\ axis^{(2)}=(0,0,1)^T\\
+    & ||\theta^{(3)}|| = -90 \degree,\ axis^{(3)}=(0,1,0)^T\\
+    & ||\theta^{(4)}|| = 90 \degree,\ axis^{(4)}=(0,0,1)^T
+\end{align*}
+Or,
+\begin{enumerate}
+    \item Rotate around x-axis by $90 \degree$;
+    \item Rotate around z-axis by $-90 \degree$;
+    \item Rotate around y-axis by $-90 \degree$;
+    \item Rotate around z-axis by $90 \degree$;
+\end{enumerate}
+
+\subsubsection*{(ii)}
+Following the procedure summarized in (i), we get the full rotation as: 
+\begin{align}
+    R_{tot} = &R_z(\pi/2)R_y(-\pi/2)R_z(-\pi/2)R_x(\pi/2) \\
+    & = \begin{pmatrix}0&-1&0\\1&0&0\\0&0&1\end{pmatrix} \begin{pmatrix}0&0&-1\\0&1&0\\1&0&0\end{pmatrix} \begin{pmatrix}0&1&0\\-1&0&0\\0&0&1\end{pmatrix} \begin{pmatrix}1&0&0\\0&0&-1\\0&1&0\end{pmatrix}\\
+    & = \begin{pmatrix}1&0&0\\0&-1&0\\0&0&-1\end{pmatrix} 
+\end{align}
+So the sequence of operation is equivalent of getting the inverse of the y- and z- coordinates. 
+
+\subsubsection*{(iii)}
+Following the first-order Taylor series, the angle at each time point is:
+\[
+    \theta^{(0)}=(0,0,0)^T\to\theta^{(1)}=(\frac{\pi}{2},0,0)^T\to\theta^{(2)}=(\frac{\pi}{2},0,-\frac{\pi}{2})^T\to\theta^{(3)}=(\frac{\pi}{2},-\frac{\pi}{2},-\frac{\pi}{2})^T\to\theta^{(4)}=(\frac{\pi}{2},-\frac{\pi}{2},0)^T 
+\]
+To verify, the total rotation for Euler angle is given as:
+\begin{equation}
+    R = R_z(\theta_z)R_x(-\theta_x)R_y(-\theta_y). 
+\end{equation}
+Therefore the rotation matrix for the Euler angle for each step is:
+\begin{equation}
+    R^{(1)} = \begin{pmatrix}1&0&0\\0&0&1\\0&-1&0\end{pmatrix}  
+\end{equation}
+\begin{equation}
+    R^{(2)} = \begin{pmatrix}0&0&-1\\-1&0&0\\0&-1&0\end{pmatrix}  
+\end{equation}
+\begin{equation}
+    R^{(3)} = \begin{pmatrix}1&0&0\\0&0&-1\\0&1&0\end{pmatrix}  
+\end{equation}
+\begin{equation}
+    R^{(4)} = \begin{pmatrix}0&0&-1\\-1&0&0\\0&1&0\end{pmatrix}  
+\end{equation}
+The resulting R4 is not the same as the rotation matrix in (ii).
+
+\subsubsection*{(iv)}
+Due to the non-commute nature of rotation operation, the actual procedure matters for rotation. The effect of a sequence of rotation cannot by equivalently represented as a full rotation given as the final outcome angle (Euler angle). 
+From the operational perspective, the Euler angle is illy defined when the vector is along certain axis around which the rotation happens, introducing ambiguity. 
+
+\newpage
+
+\section*{Programming Part}
+\subsection*{}
+
+
+\end{document}
