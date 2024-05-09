@@ -113,8 +113,28 @@ From the operational perspective, the Euler angle is illy defined when the vecto
 
 \newpage
 
-\section*{Programming Part}
-\subsection*{}
+\section{Programming Part}
+\subsection{Noise and Bias Estimation}
+\subsubsection{Bias Estimation}
+The reported bias values: 
+\begin{center}
+    \begin{tabular}{ c|c|c|c } 
+         & $x-$ & $y-$ & $z-$ \\ 
+        \hline
+        gyr\_bias & -3.57494    & 2.23188   & -0.10047 \\ % -3.56139 & 2.24696 & -0.09040 \\ 
+        acc\_bias &  1.059      & 0.719     & 8.899 \\ % 1.644 & 0.988 & 8.900 \\ 
+    \end{tabular}
+\end{center}
 
+\subsubsection{Noise Variance Estimation}
+The reported variance values: 
+\begin{center}
+    \begin{tabular}{ c|c|c|c } 
+         & $x-$ & $y-$ & $z-$ \\ 
+        \hline
+        gyr\_var & 0.01021  & 0.01014   & 0.01017 \\
+        acc\_var & 0.000    & 0.000     & 0.001 \\
+    \end{tabular}
+\end{center}
 
 \end{document}

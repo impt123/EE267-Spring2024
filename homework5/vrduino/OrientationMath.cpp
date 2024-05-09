@@ -17,21 +17,21 @@ double computeAccRoll(double acc[3]) {
 /** TODO: see documentation in header file */
 double computeFlatlandRollGyr(double flatlandRollGyrPrev, double gyr[3], double deltaT) {
 
-  return 0.0;
+  return flatlandRollGyrPrev + gyr[2] * deltaT; // / 180.00 * 3.14159;
 
 }
 
 /** TODO: see documentation in header file */
 double computeFlatlandRollAcc(double acc[3]) {
 
-  return 0.0;
+  return atan2(acc[0], acc[1]) / 3.14159 * 180.00;
 
 }
 
 /** TODO: see documentation in header file */
 double computeFlatlandRollComp(double flatlandRollCompPrev, double gyr[3], double flatlandRollAcc, double deltaT, double alpha) {
 
-  return 0.0;
+  return alpha * (flatlandRollCompPrev + gyr[2] * deltaT) + (1 - alpha) * flatlandRollAcc;
 
 }
 
