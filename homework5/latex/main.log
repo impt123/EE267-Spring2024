@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.4.6)  8 MAY 2024 17:53
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.4.6)  9 MAY 2024 16:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -279,14 +279,20 @@ Overfull \hbox (24.47195pt too wide) detected at line 90
 
 [1
 
-] [2] [3] (./main.aux) ) 
+] [2]
+File: figures/fig_threecurve.png Graphic file (type bmp)
+<figures/fig_threecurve.png>
+ [3]
+File: figures/fig_quaternion1.png Graphic file (type bmp)
+<figures/fig_quaternion1.png>
+ [4] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 4593 strings out of 476179
- 72664 string characters out of 5809545
+ 4612 strings out of 476179
+ 73157 string characters out of 5809545
  419779 words of memory out of 5000000
- 25290 multiletter control sequences out of 15000+600000
+ 25304 multiletter control sequences out of 15000+600000
  474300 words of font info for 57 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 108i,14n,106p,366b,238s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 108i,14n,106p,741b,238s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.pdf (3 pages).
+Output written on main.pdf (4 pages).

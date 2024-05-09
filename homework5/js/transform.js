@@ -79,12 +79,18 @@ var MVPmat = function ( dispParams ) {
 				- viewerPosition.x,
 				- viewerPosition.y,
 				- viewerPosition.z );
+		
+		var quaternion1 = state.imuQuaternion.clone(); 
+		quaternion1.y = - quaternion1.y;		
+
+		var rotationMatrix = new THREE.Matrix4().makeRotationFromQuaternion(quaternion1);
 
 		var ipdTranslateMat =
 			new THREE.Matrix4().makeTranslation( halfIpdShift, 0, 0 );
 
 		var viewMat = new THREE.Matrix4()
 			.premultiply( translationMat )
+			.premultiply( rotationMatrix )
 			.premultiply( ipdTranslateMat );
 
 		return viewMat;
@@ -106,6 +112,15 @@ var MVPmat = function ( dispParams ) {
 		// You can access the quaternion by state.imuQuaternion.
 
 		var viewerPosition = state.viewerPosition;
+		var quaternion2 = state.imuQuaternion.clone(); 
+		quaternion2.w = -quaternion2.w;	
+		quaternion2.x = -quaternion2.x;	
+		quaternion2.z = -quaternion2.z;
+		
+		var rotationMatrix = new THREE.Matrix4().makeRotationFromQuaternion(quaternion2);
+
+		var translationHeadNeckMat1 = new THREE.Matrix4().makeTranslation(0, - neckLength, - headLength );
+		var translationHeadNeckMat2 = new THREE.Matrix4().makeTranslation(0, neckLength, headLength );
 
 		var translationMat =
 			new THREE.Matrix4().makeTranslation(
@@ -118,6 +133,9 @@ var MVPmat = function ( dispParams ) {
 
 		var viewMat = new THREE.Matrix4()
 			.premultiply( translationMat )
+			.premultiply( translationHeadNeckMat1 )
+			.premultiply( rotationMatrix)
+			.premultiply( translationHeadNeckMat2 )
 			.premultiply( ipdTranslateMat );
 
 		return viewMat;

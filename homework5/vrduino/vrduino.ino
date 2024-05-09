@@ -24,7 +24,7 @@
 
 //complementary filter value [0,1].
 //1: ignore acc tilt, 0: use all acc tilt
-double alphaImuFilter = 0.99;
+double alphaImuFilter = 0.9;
 
 //if true, get imu values from recorded data in external file
 //if false, get imu values from live sampling.
@@ -37,7 +37,7 @@ bool test = false;
 bool measureImuBias = false;
 
 //if measureBias is false, set the imu bias to the following:
-double gyrBiasSet[3] = {-3.56139, 2.24696, -0.09040};
+double gyrBiasSet[3] = {-3.57494, 2.23188, -0.10047 };
 
 //initialize orientation tracker
 OrientationTracker tracker(alphaImuFilter, simulateImu);
@@ -68,7 +68,7 @@ const int ACC    = 4;
 const int QC     = 5;
 
 //chose which values you want to stream
-int streamMode = FLAT;
+int streamMode = QC;
 
 //variables to measure read frequency
 int nReads = 0;

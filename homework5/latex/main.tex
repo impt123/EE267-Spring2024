@@ -137,4 +137,20 @@ The reported variance values:
     \end{tabular}
 \end{center}
 
+\subsubsection*{2.2.4 Flatland Orientation Tracking Comparison}
+\begin{figure}[h!t]
+    \centering\includegraphics[width=0.7\textwidth]{figures/fig_threecurve.png}
+\end{figure}
+Description: The gyro-only curve is not noisy but has an offset from the groundtruth. The accelaration-only curve is noisy. The complementary filter resulting in low-noise result without global bias. Comparing the cases with different alpha values, for very small alpha, the complementary curve converges to the accelaration curve with large noise, while for large alpha, the complementary curve converges to the gyro-only curve with a bias. An intermediate level of alpha mixing factor can give a good result. 
+
+\subsubsection*{2.4.4 Quaternion-Based Orientation Tracking Algorithm Comparison}
+\begin{figure}[h!t]
+    \centering\includegraphics[width=0.7\textwidth]{figures/fig_quaternion1.png}
+\end{figure}
+Description: For the first case with $\alpha=0.9$, the comparison between the gyro-only motion and the motion given by the complementary filter shows that the they follow similar rotational motion. However there is a bias (offset) in between. For the second case (b) with $\alpha=0$, comparing acc-only motion with the motion given by the complementary filter shows that the z-axis follows the same orientation. However, due to the undefinable y-rotation in Euler angle, the accelerometer-only case cannot respond to y-rotation. On the other hand the complementary filter enables full rotation. Besides both cases show large noise. 
+
+\subsubsection*{2.5.3 Head $\&$ Neck Model Discussion}
+The actual motion parallex is actually quite obvious. For the case with head and neck model, when rotating head, the perspective changes a little bit as well, while it is not shown in the case without head and neck modelling. This helps to give a more realistic rendering scene! 
+
+
 \end{document}
