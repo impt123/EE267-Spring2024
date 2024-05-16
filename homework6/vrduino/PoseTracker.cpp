@@ -1,5 +1,6 @@
 #include "PoseTracker.h"
 #include <Wire.h>
+// #include <iostream>
 
 PoseTracker::PoseTracker(double alphaImuFilterIn, int baseStationModeIn, bool simulateLighthouseIn) :
 
@@ -80,11 +81,20 @@ int PoseTracker::updatePose() {
   // and orientation estimates at the end of this function
   //
   // return 0 if errors occur, return 1 if successful
-
-
-
-
-
-  return 0;
+  convertTicksTo2DPositions(clockTicks, position2D);
+  double Amat[8][8];
+  formA(position2D, positionRef, Amat);
+  double hVec[8];
+  bool invertability = solveForH(Amat, position2D, hVec);
+  if( !invertability ) { 
+    // std::cout << "Matrix not invertable! Return False!"; 
+    // printf("Matrix not invertable! Return False!\n");
+    return 0; 
+  }
+  double rotationFull[3][3];
+  getRtFromH(hVec, rotationFull, position);
+  quaternionHm = getQuaternionFromRotationMatrix(rotationFull);
+  // printf("Matrix invertable! Return True!", hVec[1]);
+  return 1;
 
 }
